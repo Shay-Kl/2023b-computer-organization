@@ -88,3 +88,8 @@ start:
 #dl
     #leaq $0x40FE67, %rdx 
 #rdx - instants don't have an effective adress
+
+#quit
+	mov $60, %rax
+	xor %rdi, %rdi
+	syscall

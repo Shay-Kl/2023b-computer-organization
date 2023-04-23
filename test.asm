@@ -3,4 +3,4 @@
 
 .text
 start:
-	
+	xor %rax %rax

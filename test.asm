@@ -1,6 +1,7 @@
-.global _start
+.global main
 .data
 
 .text
-_start:
+main:
 	xor %rax, %rax
+	ret

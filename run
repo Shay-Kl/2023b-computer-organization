@@ -1,2 +1,2 @@
-as $1.asm -o $1.o
+as $1.asm -g -o $1.o
 ld $1.o -o $1

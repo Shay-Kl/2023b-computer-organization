@@ -31,11 +31,12 @@ _start:
 #rax
     movb 7(%rbx), %al
 #rax
-    #lea (arr), %rbx DEADBEEF
-    #mov $0xDEADBEEF, %rbx
+    #lea (arr), %rbx
+    mov $0xDEADBEEF, %rbx
     mov %bh, %al
     xor %al, %sil
     shr $5, %rsi
+    lea (arr), %rbx
 #rsi
     movw -4(%rbx, %rsi, 2), %dx
 #dx
@@ -63,7 +64,7 @@ _start:
 #a+4
     movb $78, b
 #b
-    movq $arr, b
+    movl $0xdeadbeef, b
 #b
     movswq (b), %rdx
 #rdx

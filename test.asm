@@ -2,5 +2,5 @@
 .data
 
 .text
-start:
+_start:
 	xor %rax, %rax

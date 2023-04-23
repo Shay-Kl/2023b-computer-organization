@@ -1,27 +1,28 @@
 .data
-a: .long 0
-b: .long 0
-inputFormat: .asciz "%d%d"
-outputFormat: .asciz "%d"
+a: .quad 0
+b: .quad 0
+inputFormat: .asciz "%lld%lld"
+outputFormat: .asciz "%lld"
  
-.extern _printf
-.extern _scanf
+.extern printf
+.extern scanf
 .text
-.global _main
-_main:
+.global main
+main:
 _start:
-    movl %esp, %ebp # for correct debugging
-    pushl $b
-    pushl $a
-    pushl $inputFormat
-    call _scanf
-    movl a, %eax
-    addl b, %eax
-    pushl %eax
-    pushl $outputFormat
-    call _printf
-    movl %ebp, %esp
-    xorl %eax, %eax
+    movq %rsp, %rbp # for correct debugging
+    subq $32, %rsp
+    andq $-16, %rsp
+    movq $inputFormat, %rcx
+    movq $a, %rdx
+    movq $b, %r8
+    call scanf
+    movq (a), %rdx
+    addq (b), %rdx
+    movq $outputFormat, %rcx
+    call printf
+    movq %rbp, %rsp
+    xorq %rax, %rax
     ret
     
     

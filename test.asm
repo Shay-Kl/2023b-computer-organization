@@ -1,4 +1,4 @@
-.global start
+.global _start
 .data
 
 .text

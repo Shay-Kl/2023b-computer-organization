@@ -31,7 +31,8 @@ _start:
 #rax
     movb 7(%rbx), %al
 #rax
-    lea (arr), %rbx
+    #lea (arr), %rbx DEADBEEF
+    #mov $0xDEADBEEF, %rbx
     mov %bh, %al
     xor %al, %sil
     shr $5, %rsi

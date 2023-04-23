@@ -6,7 +6,7 @@ arr: .short 6, 0xEA, 0x22, 0x4B1D, 0b1010
 
 _start:
 
-mov %rax, $60 
-xor %rdi, %rdi 
+movq %rax, $60 
+xorq %rdi, %rdi 
 
 syscall

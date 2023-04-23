@@ -13,8 +13,8 @@ key: .quad 0x0406282309052021
 
 
 .text
-.global start
-start:
+.global _start
+_start:
     movq %rsp, %rbp #for correct debugging
     xor %rcx, %rcx
     movl $0x5432, %ebx

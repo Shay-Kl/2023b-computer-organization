@@ -12,10 +12,9 @@ key: .quad 0x0406282309052021
 .lcomm c, 10
 
 
-.section .text
-.global WinMain
-WinMain:
-main:
+.text
+.global start
+start:
     movq %rsp, %rbp #for correct debugging
     xor %rcx, %rcx
     movl $0x5432, %ebx

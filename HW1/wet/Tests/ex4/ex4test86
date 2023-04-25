@@ -1,0 +1,196 @@
+.global _start
+
+  .section .text
+
+  movq $head, %rax
+  cmpq $node_0, 0(%rax)
+  jne bad_exit
+
+  movq $node_0, %rax
+  cmpl $415, (%rax)
+  jne bad_exit
+  cmpq $node_1, 4(%rax)
+  jne bad_exit
+
+  movq $node_1, %rax
+  cmpl $452, (%rax)
+  jne bad_exit
+  cmpq $node_9, 4(%rax)
+  jne bad_exit
+
+  movq $node_9, %rax
+  cmpl $204, (%rax)
+  jne bad_exit
+  cmpq $node_3, 4(%rax)
+  jne bad_exit
+
+  movq $node_3, %rax
+  cmpl $793, (%rax)
+  jne bad_exit
+  cmpq $node_4, 4(%rax)
+  jne bad_exit
+
+  movq $node_4, %rax
+  cmpl $797, (%rax)
+  jne bad_exit
+  cmpq $node_5, 4(%rax)
+  jne bad_exit
+
+  movq $node_5, %rax
+  cmpl $93, (%rax)
+  jne bad_exit
+  cmpq $node_6, 4(%rax)
+  jne bad_exit
+
+  movq $node_6, %rax
+  cmpl $624, (%rax)
+  jne bad_exit
+  cmpq $node_7, 4(%rax)
+  jne bad_exit
+
+  movq $node_7, %rax
+  cmpl $644, (%rax)
+  jne bad_exit
+  cmpq $node_8, 4(%rax)
+  jne bad_exit
+
+  movq $node_8, %rax
+  cmpl $30, (%rax)
+  jne bad_exit
+  cmpq $node_2, 4(%rax)
+  jne bad_exit
+
+  movq $node_2, %rax
+  cmpl $943, (%rax)
+  jne bad_exit
+  cmpq $node_10, 4(%rax)
+  jne bad_exit
+
+  movq $node_10, %rax
+  cmpl $348, (%rax)
+  jne bad_exit
+  cmpq $node_11, 4(%rax)
+  jne bad_exit
+
+  movq $node_11, %rax
+  cmpl $951, (%rax)
+  jne bad_exit
+  cmpq $node_12, 4(%rax)
+  jne bad_exit
+
+  movq $node_12, %rax
+  cmpl $524, (%rax)
+  jne bad_exit
+  cmpq $node_13, 4(%rax)
+  jne bad_exit
+
+  movq $node_13, %rax
+  cmpl $258, (%rax)
+  jne bad_exit
+  cmpq $node_14, 4(%rax)
+  jne bad_exit
+
+  movq $node_14, %rax
+  cmpl $615, (%rax)
+  jne bad_exit
+  cmpq $node_15, 4(%rax)
+  jne bad_exit
+
+  movq $node_15, %rax
+  cmpl $76, (%rax)
+  jne bad_exit
+  cmpq $node_16, 4(%rax)
+  jne bad_exit
+
+  movq $node_16, %rax
+  cmpl $248, (%rax)
+  jne bad_exit
+  cmpq $node_17, 4(%rax)
+  jne bad_exit
+
+  movq $node_17, %rax
+  cmpl $888, (%rax)
+  jne bad_exit
+  cmpq $node_18, 4(%rax)
+  jne bad_exit
+
+  movq $node_18, %rax
+  cmpl $294, (%rax)
+  jne bad_exit
+  cmpq $0, 4(%rax)
+  jne bad_exit
+
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+  head:
+            .quad node_0
+  node_0:
+            .int 415
+            .quad node_1
+  node_1:
+            .int 452
+            .quad node_2
+  node_2:
+            .int 943
+            .quad node_3
+  node_3:
+            .int 793
+            .quad node_4
+  node_4:
+            .int 797
+            .quad node_5
+  node_5:
+            .int 93
+            .quad node_6
+  node_6:
+            .int 624
+            .quad node_7
+  node_7:
+            .int 644
+            .quad node_8
+  node_8:
+            .int 30
+            .quad node_9
+  node_9:
+            .int 204
+            .quad node_10
+  node_10:
+            .int 348
+            .quad node_11
+  node_11:
+            .int 951
+            .quad node_12
+  node_12:
+            .int 524
+            .quad node_13
+  node_13:
+            .int 258
+            .quad node_14
+  node_14:
+            .int 615
+            .quad node_15
+  node_15:
+            .int 76
+            .quad node_16
+  node_16:
+            .int 248
+            .quad node_17
+  node_17:
+            .int 888
+            .quad node_18
+  node_18:
+            .int 294
+            .quad 0
+  Source: .quad node_2
+  Value: .int 204
+
+

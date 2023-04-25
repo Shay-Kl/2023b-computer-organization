@@ -1,0 +1,133 @@
+.global _start
+
+  .section .text
+
+  movq $head, %rax
+  cmpq $node_0, 0(%rax)
+  jne bad_exit
+
+  movq $node_0, %rax
+  cmpl $133, (%rax)
+  jne bad_exit
+  cmpq $node_1, 4(%rax)
+  jne bad_exit
+
+  movq $node_1, %rax
+  cmpl $918, (%rax)
+  jne bad_exit
+  cmpq $node_9, 4(%rax)
+  jne bad_exit
+
+  movq $node_9, %rax
+  cmpl $574, (%rax)
+  jne bad_exit
+  cmpq $node_3, 4(%rax)
+  jne bad_exit
+
+  movq $node_3, %rax
+  cmpl $966, (%rax)
+  jne bad_exit
+  cmpq $node_4, 4(%rax)
+  jne bad_exit
+
+  movq $node_4, %rax
+  cmpl $98, (%rax)
+  jne bad_exit
+  cmpq $node_5, 4(%rax)
+  jne bad_exit
+
+  movq $node_5, %rax
+  cmpl $908, (%rax)
+  jne bad_exit
+  cmpq $node_6, 4(%rax)
+  jne bad_exit
+
+  movq $node_6, %rax
+  cmpl $113, (%rax)
+  jne bad_exit
+  cmpq $node_7, 4(%rax)
+  jne bad_exit
+
+  movq $node_7, %rax
+  cmpl $260, (%rax)
+  jne bad_exit
+  cmpq $node_8, 4(%rax)
+  jne bad_exit
+
+  movq $node_8, %rax
+  cmpl $220, (%rax)
+  jne bad_exit
+  cmpq $node_2, 4(%rax)
+  jne bad_exit
+
+  movq $node_2, %rax
+  cmpl $203, (%rax)
+  jne bad_exit
+  cmpq $node_10, 4(%rax)
+  jne bad_exit
+
+  movq $node_10, %rax
+  cmpl $423, (%rax)
+  jne bad_exit
+  cmpq $node_11, 4(%rax)
+  jne bad_exit
+
+  movq $node_11, %rax
+  cmpl $795, (%rax)
+  jne bad_exit
+  cmpq $0, 4(%rax)
+  jne bad_exit
+
+
+  movq $60, %rax
+  movq $0, %rdi
+  syscall
+
+bad_exit:
+  movq $60, %rax
+  movq $1, %rdi
+  syscall
+
+.section .data
+  head:
+            .quad node_0
+  node_0:
+            .int 133
+            .quad node_1
+  node_1:
+            .int 918
+            .quad node_2
+  node_2:
+            .int 203
+            .quad node_3
+  node_3:
+            .int 966
+            .quad node_4
+  node_4:
+            .int 98
+            .quad node_5
+  node_5:
+            .int 908
+            .quad node_6
+  node_6:
+            .int 113
+            .quad node_7
+  node_7:
+            .int 260
+            .quad node_8
+  node_8:
+            .int 220
+            .quad node_9
+  node_9:
+            .int 574
+            .quad node_10
+  node_10:
+            .int 423
+            .quad node_11
+  node_11:
+            .int 795
+            .quad 0
+  Source: .quad node_9
+  Value: .int 203
+
+

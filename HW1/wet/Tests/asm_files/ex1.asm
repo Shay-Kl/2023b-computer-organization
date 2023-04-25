@@ -1,11 +1,5 @@
 .global _start
 
-.section .data
-num: .quad 0xFFFFAAAA0000AAAA
-
-.section .bss
-.lcomm bool, 1
-
 .section .text
 _start:
 	movb $64, %cl #cl = 63
@@ -18,7 +12,7 @@ loop_HW1: #do {
 	shrq $63, %r8 #r8>>63
 	addb %r8b, %r9b #r9b+=r8b
 	testb %cl, %cl
-	jnz loop_HW1 #} while(cl!=0)	
+	jnz loop_HW1 #} while(cl!=0)
 	movb %r9b, (Bool) #bool = r9b
 exit_HW1:
 	

@@ -23,5 +23,5 @@ goLeft_HW1:
 	leaq 8(%rcx), %rax #rax=&(current_node.left)
 	jmp loop_HW1
 insert_HW1:
-	movq $new_node, (%rax) #current_node=new_node
+	movq $new_node, (%rax) #current_node=new_node+
 end_HW1:

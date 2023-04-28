@@ -15,7 +15,7 @@ loop_HW1: #do {
 	addb %r8b, %r9b #r9b+=r8b
 	testb %cl, %cl
 	jnz loop_HW1 #} while(cl!=0)
-	movb %r9b, (Bool) #Bool = r9b
+	movb %r9b, Bool #Bool = r9b
 exit_HW1:
 	
 	

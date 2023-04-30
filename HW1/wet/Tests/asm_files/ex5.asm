@@ -1,11 +1,11 @@
+.global _start
+
+.section .text
+_start:
 #rax - pointer to pointer to current_node
 #rcx - pointer to current_node
 #r8 - new_node's value
 #r9 - current_node's value
-
-.global _start
-.section .text
-_start:
 	movq new_node, %r8 #r8 = new_node.val
 	movq $root, %rax #rax = &root, 
 loop_HW1:

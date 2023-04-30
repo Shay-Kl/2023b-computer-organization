@@ -1,10 +1,11 @@
 .global _start
+
 .section .text
 _start:
 
-lea array1, %rcx		#rcx=arr1_add
-lea array2, %rdx		#rdx=arr2_add
-lea mergedArray, %rdi		#rdi=mArr_add
+	lea array1, %rcx		#rcx=arr1_add
+	lea array2, %rdx		#rdx=arr2_add
+	lea mergedArray, %rdi		#rdi=mArr_add
 
 loop_HW1:
 	mov (%rcx), %eax	#rax=*rcx=arr1_val

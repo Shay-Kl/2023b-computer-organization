@@ -1,10 +1,10 @@
+.global _start
+
+.section .text
+_start:
 #cl - index of the bit being checked, goes from 64 to 0
 #r9b - counter for Bool
 #r8 - where num gets manipulated
-
-.global _start
-.section .text
-_start:
 	movb $64, %cl #cl = 64
 	xorb %r9b, %r9b #r9 = 0
 loop_HW1: #do {

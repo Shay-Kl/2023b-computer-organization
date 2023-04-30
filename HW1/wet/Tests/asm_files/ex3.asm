@@ -1,57 +1,57 @@
-.global main
-
-
-.section .data
-  array1: .int 81,81,77,73,72,67,63,61,51,48,48,43,39,39,34,32,26,25,19,12,9,4,0
-  array2: .int 81,81,71,66,59,57,53,52,52,51,50,48,44,27,23,21,19,19,16,14,10,9,8,2,0
-  mergedArray: .zero 44
-
-
+.global _start
 .section .text
-main:
+_start:
 
-lea array1, %ecx		#ecx=arr1_add
-lea array2, %edx		#edx=arr2_add
-lea mergedArray, %edi		#edi=mArr_add
+lea array1, %rcx		#rcx=arr1_add
+lea array2, %rdx		#rdx=arr2_add
+lea mergedArray, %rdi		#rdi=mArr_add
 
 loop_HW1:
-	mov (%ecx), %eax	#eax=*ecx=arr1_val
-	mov (%edx), %ebx	#edx=*edx=arr2_val
-	cmp $0, %eax		#eax-0
+	mov (%rcx), %eax	#rax=*rcx=arr1_val
+	mov (%rdx), %ebx	#rdx=*rdx=arr2_val
+	test %eax, %eax		#eax-0
 	jz arr2_big_HW1		#eax=0(arr1=0)
 	cmp %eax, %ebx		#ebx-eax(arr1-arr2)
 	jz equal_HW1		#eax=ebx
 	jg arr2_big_HW1		#ebx>eax
 
 arr1_big_HW1:
-	cmp %eax, -4(%edi)
+	cmp %eax, -4(%rdi)
 	jz duplicate_arr1_HW1
-	movl %eax, (%edi)	#*edi=eax(mArr=arr1)
-	addl $4, %edi
+	movl %eax, (%rdi)	#*rdi=eax(mArr=arr1)
+	addq $4, %rdi
 duplicate_arr1_HW1:		
-	addl $4, %ecx		#ecx=+4
+	addq $4, %rcx		#rcx=+4
 	jmp loop_HW1
 
 arr2_big_HW1:
 	cmp $0, %ebx		#ebx-0
 	jz exit_HW1		#ebx=eax=0
-	cmp %ebx, -4(%edi)
+	cmp %ebx, -4(%rdi)
 	jz duplicate_arr2_HW1
-	movl %ebx, (%edi)	#*edi=ebx(mArr=arr2)
-	addl $4, %edi
+	movl %ebx, (%edi)	#*rdi=ebx(mArr=arr2)
+	addq $4, %rdi
 duplicate_arr2_HW1:		
-	addl $4, %edx
+	addq $4, %rdx
 	jmp loop_HW1
 
 equal_HW1:
-	cmp %eax, -4(%edi)
+	cmp %eax, -4(%rdi)
 	jz duplicate_equal_HW1
-	movl %eax, (%edi)	#*edi=eax(mArr=arr1)
+	movl %eax, (%rdi)	#*edi=eax(mArr=arr1)
 duplicate_equal_HW1:
-	addl $4, %ecx
-	addl $4, %edx
-	addl $4, %edi
-	jmp loop_HW1
+	addq $4, %rdi
+duplicate_equal_repeat_HW1:
+	addq $4, %rcx
+	addq $4, %rdx
+	mov (%rcx), %r8d
+	mov (%rdx), %r9d
+	cmp %r8d, %r9d
+	jne loop_HW1
+     mov -4(%rcx), %r8d
+	cmp %r8d, %r9d
+	jne loop_HW1
+     jmp duplicate_equal_repeat_HW1
 _end:
 exit_HW1:
 	movl $0, (%edi)

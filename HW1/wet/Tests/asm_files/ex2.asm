@@ -1,5 +1,4 @@
 .global _start
-.section .data
 .section .text
 _start:
 	movl num, %eax	#eax = num

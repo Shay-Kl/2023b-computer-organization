@@ -1,12 +1,12 @@
 .global _start
+
+.section .text
+_start:
 #register usage in loops
 #rax - pointer to pointer to current_node
 #rcx - pointer to current node
 #%r8 - value, later source
 #%r9 - current_node's value
-
-.section .text
-_start:
     movl Value, %r8d
     movq $head, %rax
 findValueLoop_HW1:

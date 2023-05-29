@@ -20,16 +20,62 @@ sbox:	.byte	99,124,119,123,-14,107,111,-59,48,1,103,43,-2,-41,-85,118
 
 .section	.text
 keyMixing:
+    movq (%rdi), %r8
+    movq (%rsi), %r9
+    xorq %r8, %r9
+    movq %r9, (%rdi)
+    movq 8(%rdi), %r8
+    movq 8(%rsi), %r9
+    xorq %r8, %r9
+    movq %r9, 8(%rdi)
 	ret
 
 
 byteSubstitution:
+    xor %r9, %r9 #index
+    xor %r8, %r8 #temp
+    
+HW2_LOOP:
+    movb (%rdi, %r9), %r8b #temp = input[index]
+    movb sbox(%r8), %r8b #temp = sbox[input[index]]
+    movb %r8b, (%rdi, %r9) #input[index] = temp = sbox[input[index]]
+    inc %r9
+    cmpb $128, %r9b
+    jne HW2_LOOP
 	ret
 
 
 shiftRows:
+    movl 4(%rdi), %r8d
+    rorl $1, %r8d
+    movl %r8d, 4(%rdi)
+    movl 8(%rdi), %r8d
+    rorl $2, %r8d
+    movl %r8d, 8(%rdi)
+    movl 12(%rdi), %r8d
+    rorl $3, %r8d
+    movl %r8d, 12(%rdi)
 	ret
 
 
 cipher:
+    mov %rdi, %r15 #input
+    mov %rsi, %r12 #key
+    mov %rdx, %r13 #length
+    xor %r14, %r14 #couter
+   
+    call keyMixing
+HW2_CipherLoop:
+    call byteSubstitution
+    call shiftRows
+    call mixColumns
+    mov %r12, %rsi
+    call keyMixing
+    inc %r14
+    cmp $9, %r14
+    jne HW2_CipherLoop
+    call byteSubstitution
+    call shiftRows
+    mov %r12, %rsi
+    call keyMixing
 	ret

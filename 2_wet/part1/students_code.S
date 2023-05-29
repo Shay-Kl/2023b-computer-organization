@@ -46,15 +46,38 @@ HW2_LOOP:
 
 
 shiftRows:
-    movl 4(%rdi), %r8d
-    rorl $1, %r8d
-    movl %r8d, 4(%rdi)
-    movl 8(%rdi), %r8d
-    rorl $2, %r8d
-    movl %r8d, 8(%rdi)
-    movl 12(%rdi), %r8d
-    rorl $3, %r8d
-    movl %r8d, 12(%rdi)
+#shift second row by 1
+    movb 4(%rdi), %r8b
+    movb 5(%rdi), %r9b
+    movb 6(%rdi), %r10b
+    movb 7(%rdi), %r11b
+    
+    movb %r8b, 7(%rdi)
+    movb %r9b, 4(%rdi)
+    movb %r10b, 5(%rdi)
+    movb %r11b, 6(%rdi)
+    
+#shift third row by 2
+    movb 8(%rdi), %r8b
+    movb 9(%rdi), %r9b
+    movb 10(%rdi), %r10b
+    movb 11(%rdi), %r11b
+    
+    movb %r8b, 10(%rdi)
+    movb %r9b, 11(%rdi)
+    movb %r10b, 8(%rdi)
+    movb %r11b, 9(%rdi)
+    
+#shift fourth row by 3
+    movb 12(%rdi), %r8b
+    movb 13(%rdi), %r9b
+    movb 14(%rdi), %r10b
+    movb 15(%rdi), %r11b
+    
+    movb %r8b, 13(%rdi)
+    movb %r9b, 14(%rdi)
+    movb %r10b, 15(%rdi)
+    movb %r11b, 12(%rdi)
 	ret
 
 
@@ -62,20 +85,37 @@ cipher:
     mov %rdi, %r15 #input
     mov %rsi, %r12 #key
     mov %rdx, %r13 #length
-    xor %r14, %r14 #couter
-   
+HW2_MultiLoop:
+    mov %r15, %rdi
+    mov %r12, %rsi
+    mov $9, %r14
     call keyMixing
+    
 HW2_CipherLoop:
+    mov %r15, %rdi
     call byteSubstitution
+    mov %r15, %rdi
     call shiftRows
+    mov %r15, %rdi
     call mixColumns
     mov %r12, %rsi
+    mov %r15, %rdi
     call keyMixing
-    inc %r14
-    cmp $9, %r14
+    dec %r14
+    test %r14, %r14
     jne HW2_CipherLoop
+    
+    mov %r15, %rdi
     call byteSubstitution
+    mov %r15, %rdi
     call shiftRows
     mov %r12, %rsi
+    mov %r15, %rdi
     call keyMixing
+    
+    dec %r13
+    lea 16(%r15), %r15
+    test %r13, %r13
+    jnz HW2_MultiLoop
+    
 	ret

@@ -34,10 +34,10 @@ keyMixing:
 byteSubstitution:
     xor %r9, %r9 #index
     xor %r8, %r8 #temp
-    
+    lea sbox(%rip), %r10 # r10 = position independent pointer to sbox
 HW2_LOOP:
     movb (%rdi, %r9), %r8b #temp = input[index]
-    movb sbox(%r8), %r8b #temp = sbox[input[index]]
+    movb (%r10, %r8), %r8b #temp = sbox[input[index]]
     movb %r8b, (%rdi, %r9) #input[index] = temp = sbox[input[index]]
     inc %r9
     cmpb $128, %r9b

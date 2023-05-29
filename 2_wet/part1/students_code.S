@@ -40,7 +40,7 @@ HW2_LOOP:
     movb (%r10, %r8), %r8b #temp = sbox[input[index]]
     movb %r8b, (%rdi, %r9) #input[index] = temp = sbox[input[index]]
     inc %r9
-    cmpb $128, %r9b
+    cmpb $16, %r9b
     jne HW2_LOOP
 	ret
 

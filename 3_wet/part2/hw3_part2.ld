@@ -1,15 +1,32 @@
-/* TODO: complete the script */
 
+
+PHDRS {
+  text PT_LOAD WX ;    
+  data PT_LOAD RW ;
+  rodata PT_LOAD RX;   
+}
+
+ENTRY(_hw3_unicorn)
+
+EXTERN(purple)
+EXTERN(white)
 
 SECTIONS
 {
- 
-  . = 0x60000;
+
   .data : 
   {
 	*(.data)
 	*(.bss)
-  } :data 
+  } :data = 0x60000
 
-  //TODO: add other sections
+  .text :
+  {
+  }  :text=0x400000
+
+  
+  rodata
+  {
+  }:rodata = 0x80000000
+
 }

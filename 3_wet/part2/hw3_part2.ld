@@ -1,9 +1,9 @@
 
 
 PHDRS {
-  text PT_LOAD WX ;    
-  data PT_LOAD RW ;
-  rodata PT_LOAD RX;   
+  text PT_LOAD;    
+  data PT_LOAD  ;
+  rodata PT_LOAD ;   
 }
 
 ENTRY(_hw3_unicorn)
@@ -18,15 +18,15 @@ SECTIONS
   {
 	*(.data)
 	*(.bss)
-  } :data = 0x60000
+  } :data = 0x60000 > REGION_DATA
 
   .text :
   {
-  }  :text=0x400000
+  }  :text=0x400000 > REGION_TEXT
 
   
   rodata
   {
-  }:rodata = 0x80000000
+  }:rodata = 0x80000000  > REGION_RODATA
 
 }

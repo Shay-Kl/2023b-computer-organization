@@ -2,9 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 
+int func(int a);
+int foo(int a);
 int foo(int a)
 {
-    return a;
+    return func(0)+a;
 }
 
 //Returns a*2

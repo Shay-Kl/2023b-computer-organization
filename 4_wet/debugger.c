@@ -35,7 +35,10 @@ int main(int argc, char *const argv[])
 
 	pid_t child_pid;
 	child_pid = run_target(args);
-	run_debugger(child_pid, address);
+	if(child_pid > 0)
+	{
+		run_debugger(child_pid, address);
+	}
 	return 0;
 	
 }
@@ -44,28 +47,20 @@ int main(int argc, char *const argv[])
 //Fork thing, copied from presentation
 pid_t run_target(char * const* args)
 {
-	pid_t pid;
+	pid_t pid = fork();
 
-	pid = fork();
-
-	if(pid > 0)
-	{
-		return pid;
-	}
-	else if(pid == 0)
+	if(pid == 0)
 	{
 		if(ptrace(PTRACE_TRACEME, 0, NULL, NULL) < 0)
 		{
 			perror("ptrace");
-			exit(1);
 		}
-		execv(args[0], args);
+		else
+		{
+			execv(args[0], args);
+		}
 	}
-	else
-	{
-		perror("fork");
-		exit(1);
-	}
+	return pid;
 }
 
 //The actual debugger
